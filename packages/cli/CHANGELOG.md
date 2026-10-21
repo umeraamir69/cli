@@ -1,5 +1,21 @@
 # clerk
 
+## 4.1.0
+
+### Minor Changes
+
+- Sign in from a machine without a browser: `clerk auth login` now accepts the URL your browser lands on after signing in on another device, pasted back into the terminal. ([#513](https://github.com/clerk/cli/pull/513)) by [@wyattjoh](https://github.com/wyattjoh)
+
+- Add `clerk migrate export clerk` and `clerk migrate export supabase`, and let `clerk migrate import` take the export's run ID in place of a file and `--source`. `clerk migrate` is still experimental and needs `CLERK_EXPERIMENTAL=migrate`. ([#524](https://github.com/clerk/cli/pull/524)) by [@royanger](https://github.com/royanger)
+
+- Add `clerk migrate runs` and `clerk migrate undo`, and let a re-run of `clerk migrate import` continue where a stopped one left off. `clerk migrate` is still experimental and needs `CLERK_EXPERIMENTAL=migrate`. ([#515](https://github.com/clerk/cli/pull/515)) by [@royanger](https://github.com/royanger)
+
+  Every user an import creates now carries `clerkMigrateRun` (the run's ID) in its `private_metadata`, replacing any value the source had under that key. A re-run reads it to adopt a user whose create was cut off. Nothing removes it afterwards, and your backend can read it.
+
+### Patch Changes
+
+- Print plain text without terminal color codes in agent mode, so AI agents no longer see escape sequences in command output when they run without `--json`. Pass `--mode human` or set `CLERK_MODE=human` to keep colors. Status messages now also honor `NO_COLOR`. ([#534](https://github.com/clerk/cli/pull/534)) by [@royanger](https://github.com/royanger)
+
 ## 4.0.0
 
 ### Major Changes
